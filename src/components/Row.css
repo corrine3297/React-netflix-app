@@ -1,5 +1,6 @@
 .row{
     margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 .all_movies{
@@ -22,4 +23,7 @@
 
 .movie:hover{
     transform: scale(1.1);
+}
+.movie_large{
+    max-height: 350px;
 }

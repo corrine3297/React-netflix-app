@@ -2,32 +2,31 @@ import React, { useEffect, useState } from 'react'
 import tmdbAxiosInstance from '../tmdbAxiosInstance';
 import './Row.css';
 
-function Row({title,fetchUrl}) {
-    console.log(fetchUrl);
+function Row({title,fetchUrl,isPoster}) {
+    // console.log(fetchUrl);
     const base_url = "https://image.tmdb.org/t/p/original/";
     const [allMovies,setallMovies]=useState([])
     const fetchData=async()=>{
    //  const response= await tmdbAxiosInstance.get(fetchUrl)
      const {data}= await tmdbAxiosInstance.get(fetchUrl)
-      console.log(data.results)
+      // console.log(data.results)
       setallMovies(data.results)
     }
-    console.log(allMovies);
+    // console.log(allMovies);
     useEffect(()=>{
       fetchData()
     },[])
   return (
     <div className='row'> 
-        <h1>
-            {title}
+        <h2> {title}</h2>
             <div className="all_movies">
               {
                 allMovies.map(item=>(
-                  <img className='movie' src={`${base_url}/${item.backdrop_path}`} alt="no image" />
+                  <img className={`${isPoster&&'movie_large'} movie`} src={`${base_url}/${isPoster?item.poster_path:item.backdrop_path}`} alt="no image" />
                 ))
               }
             </div>
-        </h1>
+        
     </div>
   )
 }
